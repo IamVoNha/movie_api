@@ -7,11 +7,79 @@
    </head>
    <body>
      <h1>DOCUMENTATION</h1>
-     <p>
-       To build the server-side component of a “movies” web application. The web
-       application will provide users with access to information about different
-       movies, directors, and genres. Users will be able to sign up, update their
-       personal information, and create a list of their favorite movies.
-     </p>
+     <div>
+       <table>
+         <tr>
+           <th>Business Logic</th>
+           <th>URL</th>
+           <th>HTTP Method</th>
+           <th>Request Body Data Format</th>
+           <th>Respone Body Data Format</th>
+         </tr>
+         <tr>
+           <td>Get a list of movies</td>
+           <td>/Movies</td>
+           <td>GET</td>
+           <td>None</td>
+           <td>A JSON object about all Movies</td>
+         </tr>
+         <tr>
+           <td>Get data concerning a specific movie</td>
+           <td>/movies/[title]</td>
+           <td>GET</td>
+           <td>None</td>
+           <td>A JSON object holding data about a single specif movie (ratings, actors, genre, directors, date of release)</td>
+         </tr>
+         <tr>
+           <td>Return list of movies by genre</td>
+           <td>/genres/[title]</td>
+           <td>GET</td>
+           <td>Node</td>
+           <td>A JSON object holding data about the movies genre</td>
+         </tr>
+         <tr>
+           <td>Return data about a director</td>
+           <td>/director/[name]</td>
+           <td>GET</td>
+           <td>None</td>
+           <td>A JSON object holding data about a specific director (birth year, death year, bio)</td>
+         </tr>
+         <tr>
+           <td>New User Registration</td>
+           <td>/users</td>
+           <td>POST</td>
+           <td>A JSON onject holding data about the user registration</td>
+           <td>A JSON object holding data about the user that was registered</td>
+         </tr>
+         <tr>
+           <td>Update user info</td>
+           <td>/users/[username]</td>
+           <td>PUT/PATCH</td>
+           <td>None</td>
+           <td>A message indicating whether or not the users information has been upodated successfully.</td>
+         </tr>
+         <tr>
+           <td>Add to a list of favorits movies</td>
+           <td>/users/[username]/favorites/[title]</td>
+           <td>POST</td>
+           <td>A JSON object holding data about movies to add to favorites</td>
+           <td>A JSON object holding data about movies added to favorites</td>
+         </tr>
+         <tr>
+           <td>Remove a movie from list of favorites</td>
+           <td>/users/[username]/favorites/[title]</td>
+           <td>DELETE</td>
+           <td>Nonde</td>
+           <td>A message indication whether or not the movie has been successfully removed from list of favorites.</td>
+         </tr>
+         <tr>
+           <td>Existing user deregistration</td>
+           <td>/users/[username]</td>
+           <td>DELETE</td>
+           <td>None</td>
+           <td>A message indication whether or not the user has successfully deregistered their account.</td>
+         </tr>
+       </table>
+     </div>
    </body>
  </html>
