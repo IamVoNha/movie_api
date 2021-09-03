@@ -28,35 +28,68 @@
            <td>/movies/[title]</td>
            <td>GET</td>
            <td>None</td>
-           <td>A JSON object holding data about a single specif movie (ratings, actors, genre, directors, date of release)</td>
+           <td>A JSON object holding data about a single specif movie (description, genre, directors, ImagePath, Featured or not) <br />
+                Example: <br />
+                { "id":1 <br />
+                "title":" Sprited Away", <br />
+                "director": "Hayao Miyazaki", <br />
+                "genre:" ["Animated"], }</td>
          </tr>
          <tr>
            <td>Return list of movies by genre</td>
            <td>/genres/[title]</td>
            <td>GET</td>
            <td>Node</td>
-           <td>A JSON object holding data about the movies genre</td>
+           <td>A JSON object holding data about the movies genre. <br />
+                Example: <br />
+                { <br />
+                "genre:"Thriller" <br />
+                "Thriller are characterized and defined by the moods they elicit, giving viewers heightened feelings of suspense, excitement, surprise, anticipation and anxiety." <br />
+                }
+              </td>
          </tr>
          <tr>
            <td>Return data about a director</td>
            <td>/director/[name]</td>
            <td>GET</td>
            <td>None</td>
-           <td>A JSON object holding data about a specific director (birth year, death year, bio)</td>
+           <td>A JSON object holding data about a specific director (Name, Birth Year, Death Year, BIO) <br />
+              Example: <br />
+              { <br />
+              "name": "James Cameron", <br />
+               "Bio": "James Francis Cameron CC is a Canadian film director, producer, screenwriter, editor, artist, and environmentalist.", <br />
+               "DOB": "August 16, 1954", <br />
+               "DOD": " - ", <br />
+               }
+             </td>
          </tr>
          <tr>
            <td>New User Registration</td>
            <td>/users</td>
            <td>POST</td>
            <td>A JSON onject holding data about the user registration</td>
-           <td>A JSON object holding data about the user that was registered</td>
+           <td>A JSON object holding data about the user that was registered.  <br />
+              For Example <br />
+              { <br />
+              "Username" : "johndoe", <br />
+              "Password" : "1111", <br />
+              "Email" : "eodnhoj11@gmail.com", <br />
+              "Birthday" : "01/01/1991", <br />
+              }</td>
          </tr>
          <tr>
            <td>Update user info</td>
            <td>/users/[username]</td>
            <td>PUT/PATCH</td>
            <td>None</td>
-           <td>A message indicating whether or not the users information has been upodated successfully.</td>
+           <td>A message indicating whether or not the users information has been upodated successfully. <br />
+              For Example <br />
+              { <br />
+              "Username" : "oneandonly", <br />
+              "Password" : "5555", <br />
+              "Email" : "IamTheOne55@gmail.com", <br />
+              "Birthday" : "03/01/1991", <br />
+              }</td>
          </tr>
          <tr>
            <td>Add to a list of favorites movies</td>
