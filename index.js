@@ -6,6 +6,8 @@ const { check, validationResult } = require('express-validator');
 
 const mongoose = require('mongoose');
 const Models = require('./models.js');
+const app = express();
+const cors = require('cors');
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -14,13 +16,9 @@ mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnified
 
 //mongoose.connect('mongodb://localhost:27017/theMoviesdb', { useNewUrlParser: true, useUnifiedTopology: true });
 
-const app = express();
-
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(bodyParser.json());
-
-const cors = require('cors');
 
 let allowedOrigins = ['http://localhost:8081', 'http://localhost:1234', 'https://nhas-flixdb-2021.herokuapp.com/',];
 
