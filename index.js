@@ -43,8 +43,10 @@ app.get('/', (req, res) => {
   res.send('Welcome to My Flix Database!');
 });
 
-//Get the list of data about All movies
-app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
+//Get the list of data about All movies 
+
+//GIVING REACT ACCESS TO API, BY TEMPORARILY REMOVING AUTHENTICATION MIDDLEWARE FOR MOVIES ENDPOINT!
+/* app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
    Movies.find()
    .then((movies) => {
      res.status(201).json(movies);
@@ -53,7 +55,7 @@ app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) 
      console.error(err);
      res.status(500).send('Error: ', err);
    });
-});
+}); */
 
 //Gets data about a specific movie
 app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req, res) => {
