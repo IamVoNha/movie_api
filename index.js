@@ -20,7 +20,7 @@ app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
-let allowedOrigins = ['http://localhost:8081', 'http://localhost:1234', 'https://nhas-flixdb-2021.herokuapp.com',];
+let allowedOrigins = ['http://localhost:8081', 'http://localhost:1234', 'https://nhas-flixdb-2021.herokuapp.com', 'https://nv-myflix.netlify.app'];
 
  app.use(cors({
    origin: (origin, callback) => {
