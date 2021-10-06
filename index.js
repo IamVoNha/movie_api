@@ -20,7 +20,7 @@ app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
-let allowedOrigins = ['http://localhost:8081', 'http://localhost:1234', 'https://nhas-flixdb-2021.herokuapp.com',];
+let allowedOrigins = ['http://localhost:8081', 'http://localhost:1234', 'https://nhas-flixdb-2021.herokuapp.com', 'https://nv-myflix.netlify.app']; 
 
  app.use(cors({
    origin: (origin, callback) => {
@@ -45,8 +45,7 @@ app.get('/', (req, res) => {
 
 //Get the list of data about All movies 
 
-//GIVING REACT ACCESS TO API, BY TEMPORARILY REMOVING PASSPORT AUTHENTICATION MIDDLEWARE FOR MOVIES ENDPOINT!
-app.get('/movies', /*passport.authenticate('jwt', { session: false }),*/ (req, res) => {
+app.get('/movies', *passport.authenticate('jwt', { session: false }), (req, res) => {
    Movies.find()
    .then((movies) => {
      res.status(201).json(movies);
