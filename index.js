@@ -170,29 +170,35 @@ app.get('/users/:Name', passport.authenticate('jwt', { session: false }), (req, 
     });
 });
 
-//Update User Information
-app.put("/users/:Username", passport.authenticate('jwt', { session: false }), (req, res) => {
-   Users.findOneAndUpdate(
-     { Username: req.params.Username },
-     {
-       $set: {
-         Username: req.body.Username,
-         Password: req.body.Password,
-         Email: req.body.Email,
-         Birthday: req.body.Birthday
-       }
-     },
-     { new: true }, // This line makes sure that the updated document is returned
-     (err, updatedUser) => {
-       if (err) {
-         console.error(err);
-         res.status(500).send("Error: " + err);
-       } else {
-         res.json(updatedUser);
-       }
-     }
-   );
- });
+//Update a user's details using authentication
+app.put(
+  '/users/:Username',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    let hashedPassword = Users.hashPassword(req.body.Password);
+    Users.findOneAndUpdate(
+      { Username: req.params.Username },
+      {
+        $set: {
+          Username: req.body.Username,
+          Password: hashedPassword,
+          Email: req.body.Email,
+          Birthday: req.body.Birthday
+        }
+      },
+      { new: true },
+      (err, updatedUser) => {
+        if (err) {
+          console.error(err);
+          res.status(500).send('Error: ' + err);
+        } else {
+          res.json(updatedUser);
+        }
+      }
+    );
+  }
+);
+
 
 //  Existing User Deregistration
 app.delete("/users/:Username", passport.authenticate('jwt', { session: false }), (req, res) => {
