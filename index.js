@@ -200,53 +200,70 @@ app.put(
 );
 
 
-//  Existing User Deregistration
-app.delete("/users/:Username", passport.authenticate('jwt', { session: false }), (req, res) => {
-  Users.findOneAndRemove({ Username: req.params.Username })
-    .then(user => {
-      if (!user) {
-        res.status(400).send(req.params.Username + " was not found");
-      } else {
-        res.status(200).send(req.params.Username + " was deleted.");
+//Delete a user using authentication
+app.delete(
+  '/users/:Username',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Users.findOneAndRemove({ Username: req.params.Username })
+      .then(user => {
+        if (!user) {
+          res.status(400).send(req.params.Username + ' was not found');
+        } else {
+          res.status(200).send(req.params.Username + ' was deleted.');
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        res.status(400).send('Error: ' + err);
+      });
+  }
+);
+
+//Add a movie as favorite using authentication
+app.post(
+  '/users/:Username/movies/:MovieID',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Users.findOneAndUpdate(
+      { Username: req.params.Username },
+      {
+        $push: { FavoriteMovies: req.params.MovieID }
+      },
+      { new: true },
+      (err, updatedUser) => {
+        if (err) {
+          console.error(err);
+          res.status(500).send('Error: ' + err);
+        } else {
+          res.json(updatedUser);
+        }
       }
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).send("Error: " + err);
-    });
-});
+    );
+  }
+);
 
-// Adding movies to list of favorites
-app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
-   Users.findOneAndUpdate({Username: req.params.Username}, {
-     $push: {FavoriteMovies: req.params.MovieID}
-   },
-   {new: true},
-   (err, updatedUser) => {
-     if(err) {
-       console.error(err);
-       res.status(500).send('Error: ' + err);
-     } else {
-       res.json(updatedUser);
-     }
-   });
- });
+//Remove a movie from favorites using authentication
+app.delete(
+  '/users/:Username/movies/:MovieID',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Users.findOneAndUpdate(
+      { Username: req.params.Username },
+      { $pull: { FavoriteMovies: req.params.MovieID } },
+      { new: true },
+      (err, updatedUser) => {
+        if (err) {
+          console.error(err);
+          res.status(500).send('Error: ' + err);
+        } else {
+          res.json(updatedUser);
+        }
+      }
+    );
+  }
+);
 
-//Deleting movie from list of favorite
-app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
-   Users.findOneAndUpdate({Username: req.params.Username}, {
-     $pull: {FavoriteMovies: req.params.MovieID}
-   },
-   {new: true},
-   (err, updatedUser) => {
-     if(err) {
-       console.error(err);
-       res.status(500).send('Error: ' + err);
-     } else {
-       res.json(updatedUser);
-     }
-   });
- });
 
 //Error
 
