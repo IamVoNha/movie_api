@@ -29,6 +29,7 @@ let allowedOrigins = [
   '*',
   'https://iamvonha.github.io',
   'https://iamvonha.github.io/',
+  'https://github.com/IamVoNha/myFlix-client',
   'https://iamvonha.github.io/myFlix-Angular-client',
   'https://iamvonha.github.io/myFlix-Angular-client/',
   'https://iamvonha.github.io/myFlix-Angular-client/movies',
